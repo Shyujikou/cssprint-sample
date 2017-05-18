@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Ignore commercial fonts
+*.ttf
+*.TTF
+
+# Ignore temp files
+src/.main_rendered.html

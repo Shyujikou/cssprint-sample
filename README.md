@@ -1,2 +1,33 @@
-# cssprint-sample
-Sample code of HTML+CSS for book print, excerpted from source code of What is Physics (Chinese edition, originally written by Sin-Itiro Tomonaga).
+# HTML+CSS 图书排版示例
+
+这里的示例代码节选自本人的译作[《物理是什么》](http://www.ituring.com.cn/book/1969)简体中文版，朝永振一郎著，人民邮电出版社2017年6月出版。
+
+这本书是我自己用HTML+CSS排版输出的，在国内出版领域属于小众案例，因此我正在写一篇文章分享这次经历和其中的一些技术话题（文章链接等发布后补充），为了让大家更好地理解HTML+CSS图书排版，我将这本书的部分源代码共享出来，欢迎各种讨论和交流。
+
+## 环境依赖
+
+要将本示例中的代码渲染输出成PDF，需要安装以下软件：
+
+- [PhantomJS](http://phantomjs.org/)
+- [Prince](http://www.princexml.com/)
+
+其中Prince为商业软件，但提供全功能免费版本，只是输出的PDF文件第一页右上角会加上水印，本示例中预先渲染的PDF文件也包含该水印。
+
+此外，本示例中还引用了方正的若干商业字体，这些字体已由出版社（人民邮电出版社）获得授权，但该授权仅用于出版图书使用，因此我无法将这些字体一起提供出来，大家可以自行安装这些字体，或者在`src\css\styles.css`样式文件中替换掉这些字体。
+
+## 如何渲染PDF
+
+示例中提供了渲染脚本`build_pdf`，这个脚本会先运行PhantomJS调用MathJax来渲染文章中的数学公式，然后再运行Prince渲染输出PDF，请确保系统中已安装上述软件。
+
+示例中也提供了我预先渲染好的PDF文件（`build/book.pdf`）供大家参考。
+
+## 版权声明
+
+本示例中的代码为已正式出版的图书的一部分，该书的版权属人民邮电出版社所有。本示例中的代码仅供学习交流使用，如利用本示例中的代码对版权方造成侵权后果，则需承担相应的法律责任。
+
+## 致谢
+
+本示例中使用了以下开源项目的代码，在此表示感谢：
+
+- [MathJax](https://www.mathjax.org/)
+- [Han 汉字标准格式排版框架](https://github.com/ethantw/Han)

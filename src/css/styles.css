@@ -1,0 +1,621 @@
+/* Fonts */
+@font-face {
+  font-family: "TeX";
+  src: url("../fonts/MathJax_Main-Regular.otf");
+  unicode-range: U+2E, U+30-39;
+}
+
+@font-face {
+  font-family: "Latin";
+  src: local(Times);
+  unicode-range: U+0000-00B6, U+00B8-1FFF;
+}
+
+@font-face {
+  font-family: "SongTi";
+  src: url("../fonts/FZSSJW.TTF");
+}
+
+@font-face {
+  font-family: "SongTi";
+  src: url("../fonts/FZSHJW.TTF");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "KaiTi";
+  src: url("../fonts/FZKTJW.TTF");
+}
+
+@font-face {
+  font-family: "FangSong";
+  src: url("../fonts/FZFSJW.TTF");
+}
+
+@font-face {
+  font-family: "HeiTi";
+  src: url("../fonts/FZHTJW.TTF");
+}
+
+@font-face {
+  font-family: "XiHei";
+  src: url("../fonts/FZXHGBK.TTF");
+}
+
+/* Pages */
+@page {
+   size: 145mm 210mm;
+   margin-top: 20mm;
+   margin-bottom: 15mm;
+   margin-inside: 21mm;
+   margin-outside: 16mm;
+   marks: crop cross;
+   prince-bleed: 3mm;
+   prince-trim: 10mm;
+}
+
+@page main:left {
+   @top-left-corner {
+     content: counter(page) "　";
+     font-family: XiHei;
+     font-size: 8pt;
+     color: cmyk(0,0,0,0.8);
+   }
+
+   @top-left {
+     content: "|　" string(chaptitle);
+     font-family: XiHei;
+     font-size: 8pt;
+     color: cmyk(0,0,0,0.8);
+   }
+}
+
+@page main:right {
+   @top-right-corner {
+     content: "　" counter(page);
+     font-family: XiHei;
+     font-size: 8pt;
+     color: cmyk(0,0,0,0.8);
+   }
+
+   @top-right {
+     content: string(sectitle) "　|";
+     font-family: XiHei;
+     font-size: 8pt;
+     color: cmyk(0,0,0,0.8);
+   }
+}
+
+/* 人邮社要求55页（印刷页码）加上版权标记 */
+/* 实际物理页码为58 */
+@page main:nth(58) {
+  @left-middle {
+    content: "邮\A\A电";
+    font-family: HeiTi;
+    font-size: 0.9rem;
+    white-space: pre;
+    text-align: left;
+    margin-left: 1em;
+  }
+}
+
+/* Pages with chapter tile only on top margin */
+
+/*
+@page main-chap-title-only {
+  @top-center {
+    content: string(chaptitle);
+    font-family: "PingFang SC";
+    font-weight: 300;
+    font-size: 8pt;
+    color: cmyk(0,0,0,0.8);
+  }
+}
+*/
+
+@page main-chap-title-only:left {
+   @top-left-corner {
+     content: counter(page) "　";
+     font-family: XiHei;
+     font-size: 8pt;
+     color: cmyk(0,0,0,0.8);
+   }
+
+   @top-left {
+     content: "|　" string(chaptitle);
+     font-family: XiHei;
+     font-size: 8pt;
+     color: cmyk(0,0,0,0.8);
+   }
+}
+
+@page main-chap-title-only:right {
+   @top-right-corner {
+     content: "　" counter(page);
+     font-family: XiHei;
+     font-size: 8pt;
+     color: cmyk(0,0,0,0.8);
+   }
+
+   @top-right {
+     content: string(chaptitle) "　|";
+     font-family: XiHei;
+     font-size: 8pt;
+     color: cmyk(0,0,0,0.8);
+   }
+}
+
+@page chapter-title {
+  margin-top: 40%;
+}
+
+@page main:blank {
+  @top-left {
+    content: normal;
+  }
+
+  @top-right {
+    content: normal;
+  }
+
+  @top-right-corner {
+    content: normal;
+  }
+
+  @top-left-corner {
+    content: normal;
+  }
+}
+
+@page main-chap-title-only:blank {
+  @top-left {
+    content: normal;
+  }
+
+  @top-right {
+    content: normal;
+  }
+
+  @top-right-corner {
+    content: normal;
+  }
+
+  @top-left-corner {
+    content: normal;
+  }
+}
+
+html {
+  font-size: 10pt;
+}
+
+body {
+	counter-reset: chapternum figurenum;
+	font-family: TeX, Latin, SongTi;
+	line-height: 2.0;
+	font-size: 1rem;
+  orphans: 1;
+  widows: 1;
+}
+
+article {
+  page: main;
+}
+
+article.chap-title-only {
+  page: main-chap-title-only;
+}
+
+h1 {
+  string-set: chaptitle content();
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: HeiTi;
+}
+
+h1 {
+  page: chapter-title;
+  page-break-before: right;
+  page-break-after: right;
+  counter-reset: figurenum;
+  counter-reset: footnote;
+  counter-increment: chapternum;
+  prince-bookmark-level: 1;
+
+  font-size: 2.6rem;
+  text-align: right;
+}
+
+h1#ch0 {
+  counter-reset: page 1;
+  counter-increment: none;
+}
+
+h2, h3 {
+  page-break-after: avoid;
+}
+
+h2 {
+  string-set: sectitle counter(chapternum) "-" content();
+  page-break-before: always;
+  prince-bookmark-level: 2;
+
+  font-size: 1.6rem;
+
+  margin-bottom: 1.5em;
+}
+
+h3 {
+  prince-bookmark-level: 3;
+
+  font-weight: 300;
+  font-size: 1.2rem;
+
+  margin-top: 2em;
+
+  page-break-after: avoid;
+}
+
+h5 {
+  font-weight: 600;
+  font-size: 1rem;
+
+  margin-bottom: 0.5em;
+  margin-top: 0em;
+}
+
+
+p {
+  text-indent: 2em;
+  text-align: justify;
+  prince-text-justify: prince-cjk;
+  prince-footnote-policy: keep-with-line;
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+
+p.ni {
+  text-indent: 0em;
+}
+
+p.hang2em {
+  text-indent: -2em;
+  margin-left: 4em;
+}
+
+p.hang2-5em {
+  text-indent: -2.3em;
+  margin-left: 4.3em;
+}
+
+p.hang3em {
+  text-indent: -3em;
+  margin-left: 5em;
+}
+
+p.hang4em {
+  text-indent: -4em;
+  margin-left: 6em;
+}
+
+p.hang5em {
+  text-indent: -5em;
+  margin-left: 7em;
+}
+
+p.mb {
+  margin-bottom: 1em;
+}
+
+p.mt {
+  margin-top: 2em;
+}
+
+p.right {
+  text-align: right;
+}
+
+a {
+  color: black;
+  text-decoration: inherit;
+}
+
+a.xref:after{
+  content: "第 " target-counter(attr(href), page) " 页";
+}
+
+a.xref-p1:after{
+  content: "第 " target-counter(attr(href), page);
+}
+
+a.xref-p2:after{
+  content: target-counter(attr(href), page) " 页";
+}
+
+.quote {
+  font-family: TeX, Latin, FangSong;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.notes {
+  font-family: TeX, Latin, KaiTi;
+  line-height: 1.5;
+  background-color: cmyk(0,0,0,0.05);
+  padding: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+figure {
+  page-break-inside: avoid;
+}
+
+figcaption {
+  text-align: center;
+  font-family: HeiTi;
+}
+
+p.fignotes {
+  font-family: TeX, Latin, KaiTi;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  text-indent: 0;
+  margin-top: 1em;
+}
+
+ol {
+  /* padding-left: 0.5em; */
+  counter-reset: o-counter;
+  text-align: justify;
+  prince-text-justify: prince-cjk;
+  prince-footnote-policy: keep-with-line;
+}
+
+/*
+.notes ol.bracket {
+  list-style-type: none;
+  text-indent: -1.5em;
+  margin-left: 2.5em;
+  padding-left: 0;
+}
+*/
+
+ol.bracket {
+  list-style-type: none;
+  text-indent: -1.5em;
+  margin-left: 3.5em;
+  padding-left: 0;
+}
+
+.bracket li:before {
+  content: '('counter(o-counter)') ';
+  counter-increment: o-counter;
+}
+
+b {
+  font-family: HeiTi;
+  font-style: inherit;
+  font-size: inherit;
+  /*
+  position: relative;
+  top: 0.05em;
+  */
+}
+
+em {
+  font-family: inherit;
+  font-weight: bold;
+  font-style: inherit;
+  text-emphasis: filled dot;
+  text-emphasis-position: under;
+  -webkit-text-emphasis: filled dot;
+  -webkit-text-emphasis-position: under;
+}
+
+span.kai {
+  font-family: TeX, Latin, KaiTi;
+}
+
+span.hei {
+  font-family: HeiTi;
+}
+
+span.song-only {
+  font-family: SongTi;
+}
+
+span.small {
+  font-size: 0.8em;
+  font-weight: 300;
+}
+
+span.xxsmall {
+  font-size: 0.45em;
+  font-weight: 300;
+}
+
+span.nowrap {
+  white-space: nowrap;
+}
+
+.MathJax, .MathJax_CHTML, .MathJax_SVG {
+  margin-left: 0.25em !important;
+  margin-right: 0.25em !important;
+}
+
+.MathJax_SVG_Display {
+  text-indent: -2.2em !important;
+}
+
+.MathJax_SVG_Display .MathJax_SVG {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/*
+table.speech {
+  width: 100%;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  border: thin solid black;
+  border-collapse: collapse;
+}
+
+table.speech td, table.speech th {
+  border-left: thin solid black;
+  border-right: thin solid black;
+  padding: 0 0.5em 0 0.5em;
+  vertical-align: top;
+}
+
+table.speech thead tr {
+  border-bottom: thin solid black;
+  font-family: "PingFang SC";
+  font-weight: 400;
+}
+*/
+
+/* footnotes */
+.fn {
+  float: footnote;
+  counter-increment: footnote;
+  font-family: TeX, Latin, KaiTi;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  text-indent: 0;
+  /* footnote-style-position: inside; */
+}
+
+.fn::footnote-call {
+  content: counter(footnote);
+  font-size: 0.8rem;
+  vertical-align: super;
+  line-height: none;
+  margin-left: 0.25em;
+  margin-right: 0.25em;
+}
+
+.fn::footnote-marker {
+
+}
+
+@page {
+  @footnotes {
+    border-top: thin solid black;
+    border-clip: 6em;
+    padding-top: 0.5em;
+    padding-left: 1em;
+    margin-top: 1em;
+  }
+}
+
+/* TOC */
+div.toc {
+  page-break-before: right;
+  page-break-after: right;
+}
+
+div.toc h1 {
+  page: initial;
+  page-break-before: initial;
+  page-break-after: initial;
+  text-align: initial;
+  counter-increment: none;
+  margin-left: 0;
+  margin-bottom: 1.5em;
+}
+
+div.toc ul {
+  list-style: none;
+
+  font-family: XiHei;
+  font-size: 1.2rem;
+  margin-left: 0;
+}
+
+div.toc ul ul {
+  font-size: 1rem;
+  margin-left: 4em;
+}
+
+div.toc ul ul ul {
+  font-size: 0.8rem;
+  margin-left: 1.5em;
+}
+
+div.toc ul li.sublevel {
+  margin-bottom: 1em;
+}
+
+div.toc ul a::after {
+  content: leader('.') '　' target-counter(attr(href), page);
+  margin-left: 1em;
+}
+
+div.toc ul ul ul a::after {
+  content: '　(' target-counter(attr(href), page) ')';
+}
+
+/* 版权页 */
+div.cip {
+  page-break-before: left;
+}
+
+div.cip h4 {
+  font-size: 1rem;
+  letter-spacing: 0.5em;
+  text-align: center;
+  margin-bottom: 1em;
+  margin-top: 0;
+}
+
+div.cip p {
+  line-height: 1.1;
+}
+
+div.cip div.meta {
+  float: bottom;
+  margin: 0;
+}
+
+div.meta p {
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+div.meta small {
+  font-size: 0.8rem;
+}
+
+div.cip div.metabox {
+  margin: 1em 2em 0.5em 2em;
+  border-top: thin solid black;
+  border-bottom: thin solid black;
+  padding: 0.5em;
+}
+
+div.metabox p {
+  text-indent: 0;
+}
+
+/* 版权声明页 */
+div.copyright {
+  page-break-before: right;
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+div.copyright h4 {
+  font-size: 2rem;
+  letter-spacing: 0.5em;
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+div.copyright p {
+  line-height: 1.5;
+}
