@@ -1,4 +1,4 @@
 #! /bin/bash
 
 phantomjs scripts/render.js src/main.html >src/.main_rendered.html
-prince src/.main_rendered.html -o build/book.pdf --pdf-title="物理是什么" --pdf-author="[日]朝永振一郎 著，周自恒 译" --no-warn-css
+prince src/.main_rendered.html -o build/book.pdf
