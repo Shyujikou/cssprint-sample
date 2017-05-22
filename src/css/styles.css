@@ -4,7 +4,7 @@
 @font-face {
   font-family: "TeX";
   src: url("../fonts/MathJax_Main-Regular.otf");
-  unicode-range: U+2E, U+30-39;
+  unicode-range: U+2E, U+30-39; /* 只使用字体中的数字和小数点 */
 }
 
 /* 西文字体，使用系统字体Times或Times New Roman */
@@ -69,6 +69,9 @@
   marks: crop cross;
   prince-bleed: 3mm;
   prince-trim: 10mm;
+
+  /* 如果要每页重置脚注号可以使用以下样式 */
+  /* counter-reset: footnote; */
 }
 
 /* 正文页面，左侧页样式 */
@@ -194,10 +197,10 @@ html {
 }
 
 body {
-	counter-reset: chapternum figurenum; /* 重置章号和图号计数器 */
-	font-family: TeX, Latin, SongTi; /* 按数字、西文、中文的顺序回退 */
-	line-height: 2.0;
-	font-size: 1rem;
+  counter-reset: chapternum figurenum; /* 重置章号和图号计数器 */
+  font-family: TeX, Latin, SongTi; /* 按数字、西文、中文的顺序回退 */
+  line-height: 2.0;
+  font-size: 1rem;
 
   /* 中文排版对页面段落孤行的控制没有特殊要求，将允许的孤行设置为1 */
   orphans: 1;
