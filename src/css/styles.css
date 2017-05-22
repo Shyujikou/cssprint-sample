@@ -401,16 +401,8 @@ ol {
 }
 
 /* 有序列表，序号为带括号的数字 */
-ol.bracket {
-  list-style-type: none;
-  text-indent: -1.5em;
-  margin-left: 3.5em;
-  padding-left: 0;
-}
-
-ol.bracket li:before {
-  content: '('counter(o-counter)') ';
-  counter-increment: o-counter;
+ol.bracket li::marker {
+  content: "(" counter(list-item) ")";
 }
 
 /* b标签自动使用黑体 */
