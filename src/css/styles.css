@@ -237,7 +237,7 @@ h1 {
   counter-reset: footnote;
   counter-increment: chapternum; /* 章号计数器+1 */
 
-  prince-bookmark-level: 1; /* 设置书签等级 */
+  bookmark-level: 1; /* 设置书签等级 */
 
   font-size: 2.6rem;
   text-align: right;
@@ -254,7 +254,7 @@ h1#ch0 {
 h2 {
   string-set: sectitle counter(chapternum) "-" content(); /* 对sectitle变量赋值用于页眉显示 */
   page-break-before: always; /* 节标题必须另起一页（前方强制换页） */
-  prince-bookmark-level: 2;
+  bookmark-level: 2;
 
   font-size: 1.6rem;
 
@@ -263,7 +263,7 @@ h2 {
 
 /* 小节标题 */
 h3 {
-  prince-bookmark-level: 3;
+  bookmark-level: 3;
 
   font-weight: 300;
   font-size: 1.2rem;
@@ -272,6 +272,11 @@ h3 {
 
   /* 避免在小节标题之后立即换页，如换页把小节标题一起换到下一页 */
   page-break-after: avoid;
+}
+
+/* 取消h3以下标题的书签级别 */
+h4, h5, h6 {
+  bookmark-level: none;
 }
 
 /* 正文中的黑体小标题 */
